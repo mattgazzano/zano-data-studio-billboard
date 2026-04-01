@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;display=swap');
+    </style>
+  </defs>
+  <text x="50%" y="54" font-family="'DM Serif Display', serif" font-size="58" fill="#0A0F1A" text-anchor="middle">Z</text>
+</svg>
