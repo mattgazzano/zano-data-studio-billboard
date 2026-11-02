@@ -1,75 +1,73 @@
-/* ============================================================
-   Zano Data Studio — main.js
-   Nav scroll, hamburger menu, scroll animations
-   ============================================================ */
-
 (function () {
   'use strict';
+  document.body.classList.add('has-js');
+  var hamburger = document.querySelector('.nav-hamburger');
+  var menu = document.querySelector('.nav-mobile');
+  var mobile = window.matchMedia('(max-width: 767px)');
 
-  // --- Nav scroll behavior ---
-  const nav = document.querySelector('.nav');
-  // On privacy page, nav is always solid (has .scrolled class in HTML)
-  const isPrivacyPage = nav.classList.contains('scrolled');
-
-  function handleNavScroll() {
-    if (isPrivacyPage) return;
-    if (window.scrollY > 40) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
+  if (hamburger && menu) {
+    hamburger.hidden = false;
+    function closeMenu(restoreFocus) {
+      menu.hidden = true;
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open menu');
+      if (restoreFocus) hamburger.focus();
     }
-  }
-
-  window.addEventListener('scroll', handleNavScroll, { passive: true });
-  handleNavScroll();
-
-  // --- Mobile hamburger menu ---
-  const hamburger = document.querySelector('.nav-hamburger');
-  const mobileMenu = document.querySelector('.nav-mobile');
-
-  if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', function () {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburger.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', isOpen);
+      var open = hamburger.getAttribute('aria-expanded') !== 'true';
+      menu.hidden = !open;
+      hamburger.setAttribute('aria-expanded', String(open));
+      hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
-
-    // Close menu when a link is clicked
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { closeMenu(false); });
     });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !menu.hidden) closeMenu(true);
+    });
+    document.addEventListener('click', function (event) {
+      if (!menu.hidden && !event.target.closest('.nav')) closeMenu(false);
+    });
+    mobile.addEventListener('change', function () { closeMenu(false); });
   }
 
-  // --- Intersection Observer for scroll animations ---
-  var fadeElements = document.querySelectorAll('.fade-up');
-
-  if (fadeElements.length > 0 && 'IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
+  var controls = document.querySelector('.preview-controls');
+  if (controls) {
+    var buttons = Array.from(controls.querySelectorAll('button'));
+    controls.hidden = false;
+    controls.setAttribute('role', 'tablist');
+    buttons.forEach(function (button, index) {
+      button.id = 'tab-' + button.dataset.preview;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', 'preview-' + button.dataset.preview);
+      var panel = document.getElementById('preview-' + button.dataset.preview);
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', button.id);
+      panel.setAttribute('tabindex', '0');
+      panel.hidden = index !== 0;
+      button.setAttribute('aria-selected', String(index === 0));
+      button.tabIndex = index === 0 ? 0 : -1;
+      function select() {
+        buttons.forEach(function (other) {
+          var active = other === button;
+          other.setAttribute('aria-selected', String(active));
+          other.tabIndex = active ? 0 : -1;
+          document.getElementById('preview-' + other.dataset.preview).hidden = !active;
         });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px',
       }
-    );
-
-    fadeElements.forEach(function (el) {
-      observer.observe(el);
-    });
-  } else {
-    // Fallback: show all elements immediately
-    fadeElements.forEach(function (el) {
-      el.classList.add('visible');
+      button.addEventListener('click', select);
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (index + buttons.length - 1) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        if (next !== undefined) {
+          event.preventDefault();
+          buttons[next].click();
+          buttons[next].focus();
+        }
+      });
     });
   }
 })();

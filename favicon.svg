@@ -1,8 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;display=swap');
-    </style>
-  </defs>
-  <text x="50%" y="54" font-family="'DM Serif Display', serif" font-size="58" fill="#0A0F1A" text-anchor="middle">Z</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Zano Data Studio Z monogram">
+  <rect width="1024" height="1024" fill="#0A0F1A"/>
+  <path d="M20 0V12L367 640H177Q144 640 123.5 625.0Q103 610 87 581L41 500H31L38 660H527V648L180 20H398Q431 20 450.5 35.5Q470 51 486 80L529 160H539L532 0Z" fill="#F9FAFB" transform="translate(266.378788 802) scale(0.878787879 -0.878787879)"/>
 </svg>
