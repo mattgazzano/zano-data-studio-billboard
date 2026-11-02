@@ -2,262 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zano Data Studio — Data Tools for Small Business</title>
-  <meta name="description" content="Ready-made dashboards, web apps, and analytics tools that help small business owners make better decisions — without needing a data team.">
-  <meta property="og:title" content="Zano Data Studio — Data Tools for Small Business">
-  <meta property="og:description" content="Ready-made dashboards, web apps, and analytics tools that help small business owners make better decisions.">
-  <meta property="og:url" content="https://zanodatastudio.com">
-  <link rel="canonical" href="https://zanodatastudio.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zano Data Studio | Dashboards, Web Apps &amp; Digital Tools</title>
+  <meta name="description" content="Thoughtful dashboards, web apps, and digital tools for work and everyday life. Explore our Travel Planner or get a custom solution built around your needs.">
+  <meta name="theme-color" content="#0A0F1A">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zano Data Studio | Dashboards, Web Apps &amp; Digital Tools">
+  <meta property="og:description" content="Thoughtful dashboards, web apps, and digital tools for work and everyday life. Explore our Travel Planner or get a custom solution built around your needs.">
+  <meta property="og:url" content="https://zanodatastudio.com/">
+  <meta property="og:image" content="https://zanodatastudio.com/assets/images/social-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Zano Data Studio. Dashboards, web apps, and digital tools.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://zanodatastudio.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
-  <!-- ====== NAVIGATION ====== -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="index.html" class="nav-brand">Zano Data Studio</a>
-      <div class="nav-links">
-        <a href="#products">Products</a>
-        <a href="#services">Services</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="mailto:matt@zanodatastudio.com" class="nav-contact">Contact</a>
-      </div>
-      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand"><img src="favicon.svg" width="42" height="42" alt=""><span>Zano Data Studio</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#products">Products</a><a href="#services">Services</a><a href="#about">About</a>
+        <a href="mailto:matt@zanodatastudio.com" class="nav-contact">Let’s talk <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="nav-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" hidden><span></span><span></span></button>
     </div>
-    <div class="nav-mobile" role="menu">
-      <a href="#products" role="menuitem">Products</a>
-      <a href="#services" role="menuitem">Services</a>
-      <a href="privacy.html" role="menuitem">Privacy Policy</a>
-      <a href="mailto:matt@zanodatastudio.com" role="menuitem">Contact</a>
-    </div>
-  </nav>
+    <nav class="nav-mobile container" id="mobile-menu" aria-label="Mobile navigation" hidden>
+      <a href="#products">Products</a><a href="#services">Services</a><a href="#about">About</a><a href="privacy.html">Privacy Policy</a><a href="mailto:matt@zanodatastudio.com">Contact</a>
+    </nav>
+  </header>
 
-  <main>
-
-    <!-- ====== HERO ====== -->
-    <section class="hero" id="hero">
-      <div class="container">
+  <main id="main">
+    <section class="hero grid-background">
+      <div class="container hero-grid">
         <div class="hero-content">
-          <div class="hero-badge hero-animate">[ Data Tools for Small Business ]</div>
-          <h1 class="hero-title hero-animate">Your data.<br>Actually working<br>for you.</h1>
-          <p class="hero-subtitle hero-animate">We build dashboards, web apps, and analytics tools that help small business owners make better decisions, without needing a data team.</p>
-          <div class="hero-ctas hero-animate">
-            <a href="#" class="btn-primary">Browse Products</a>
-            <a href="mailto:matt@zanodatastudio.com" class="btn-secondary">Work With Us</a>
-          </div>
+          <p class="eyebrow">Dashboards · Web apps · Digital tools</p>
+          <h1>Good tools.<br><span>Clearer days.</span></h1>
+          <p class="lead">Less time piecing things together. More time doing what matters. Thoughtful digital tools for your business, your travels, and everything you’re planning next.</p>
+          <div class="actions"><a href="#products" class="btn-primary">Explore the tools <span aria-hidden="true">↗</span></a><a href="#services" class="text-link">Build something custom <span aria-hidden="true">→</span></a></div>
+          <p class="hero-note">Independent studio. Practical by design.</p>
         </div>
-
-        <!-- Dashboard Mockup -->
-        <div class="dashboard-card hero-animate">
-          <div class="dashboard-header">
-            <span class="dashboard-title">Sales Overview</span>
-            <span class="dashboard-live"><span class="dashboard-live-dot"></span> Live</span>
-          </div>
-          <div class="dashboard-kpis">
-            <div class="kpi">
-              <div class="kpi-label">Revenue</div>
-              <div class="kpi-value">$12,489</div>
-              <div class="kpi-change">↑ 14.2%</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">Orders</div>
-              <div class="kpi-value">284</div>
-              <div class="kpi-change">↑ 8.7%</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-label">Margin</div>
-              <div class="kpi-value">34.1%</div>
-              <div class="kpi-change">↑ 2.3%</div>
-            </div>
-          </div>
-          <div class="dashboard-chart">
-            <div class="dashboard-chart-label">Revenue — 30 Days</div>
-            <div class="chart-line">
-              <svg viewBox="0 0 300 50" preserveAspectRatio="none" fill="none">
-                <defs>
-                  <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="rgba(22,163,74,0.3)"/>
-                    <stop offset="100%" stop-color="rgba(22,163,74,0)"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,40 Q20,38 40,35 T80,28 T120,30 T160,22 T200,18 T240,12 T280,8 L300,5" stroke="#22C55E" stroke-width="2" fill="none"/>
-                <path d="M0,40 Q20,38 40,35 T80,28 T120,30 T160,22 T200,18 T240,12 T280,8 L300,5 L300,50 L0,50 Z" fill="url(#chartGrad)"/>
-              </svg>
-            </div>
-          </div>
-          <div class="dashboard-channels">
-            <div class="channel">
-              <span class="channel-name">Etsy</span>
-              <div class="channel-bar-track"><div class="channel-bar-fill" style="width: 72%"></div></div>
-              <span class="channel-value">72%</span>
-            </div>
-            <div class="channel">
-              <span class="channel-name">Direct</span>
-              <div class="channel-bar-track"><div class="channel-bar-fill" style="width: 18%"></div></div>
-              <span class="channel-value">18%</span>
-            </div>
-            <div class="channel">
-              <span class="channel-name">Other</span>
-              <div class="channel-bar-track"><div class="channel-bar-fill" style="width: 10%"></div></div>
-              <span class="channel-value">10%</span>
-            </div>
-          </div>
-        </div>
+        <figure class="hero-preview">
+          <div class="preview-label"><span class="status-dot"></span> In the studio / Travel Planner</div>
+          <a href="travel-planner.html" class="screen-link" aria-label="Explore the Travel Planner"><img src="assets/images/planner-home-1440.webp" srcset="assets/images/planner-home-720.webp 720w, assets/images/planner-home-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 90vw, 680px" width="1440" height="1040" alt="Travel Planner Home with trip overview, travelers, and settings." fetchpriority=high decoding="async"></a>
+          <figcaption><span>One place for the whole trip.</span><a href="travel-planner.html" class="text-link">Take a closer look <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
       </div>
     </section>
-
-    <!-- ====== PRODUCTS ====== -->
-    <section class="products" id="products">
+    <div class="principles"><div class="container"><span>Useful from the first click</span><span>Clear, considered design</span><span>Built around real life</span></div></div>
+    <section class="section" id="products">
       <div class="container">
-        <div class="section-label fade-up">[ Products ]</div>
-        <h2 class="section-heading fade-up">Ready-made tools. Instant value.</h2>
-        <p class="section-subtext fade-up">Download, connect your data, and go. No setup calls, no onboarding, no contracts.</p>
-
-        <div class="products-grid">
-          <!-- Card 1 -->
-          <div class="product-card fade-up">
-            <div class="product-icon">📦</div>
-            <h3 class="product-name">Inventory Manager</h3>
-            <p class="product-desc">Track stock, sales, and purchase orders with a live dashboard connected to your Google Sheet.</p>
-            <div class="product-tags">
-              <span class="product-tag">Google Sheets</span>
-              <span class="product-tag">HTML Dashboard</span>
-              <span class="product-tag">Small Business</span>
-            </div>
-            <a href="#" class="product-link">View on Etsy →</a>
-          </div>
-          <!-- Card 2 -->
-          <div class="product-card coming-soon fade-up">
-            <div class="product-icon">📊</div>
-            <h3 class="product-name">P&amp;L Tracker <span class="coming-soon-tag">(Coming Soon)</span></h3>
-            <p class="product-desc">Profit and loss tracking built for Etsy sellers, resellers, and makers.</p>
-            <div class="product-tags">
-              <span class="product-tag">Google Sheets</span>
-              <span class="product-tag">Dashboard</span>
-              <span class="product-tag">Finance</span>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="product-card coming-soon fade-up">
-            <div class="product-icon">💰</div>
-            <h3 class="product-name">Cash Flow Planner <span class="coming-soon-tag">(Coming Soon)</span></h3>
-            <p class="product-desc">Visualize your monthly cash position and forecast ahead with confidence.</p>
-            <div class="product-tags">
-              <span class="product-tag">Google Sheets</span>
-              <span class="product-tag">Dashboard</span>
-              <span class="product-tag">Finance</span>
-            </div>
-          </div>
+        <div class="section-intro"><div><p class="eyebrow">01 / Digital products</p><h2>A little more organized.<br>A lot more possible.</h2></div><p>Practical tools, thoughtfully made. Our first product brings the details of your next adventure together.</p></div>
+        <article class="product-spotlight">
+          <a href="travel-planner.html" class="product-image" aria-label="See Travel Planner features"><img src="assets/images/planner-timeline-1440.webp" srcset="assets/images/planner-timeline-720.webp 720w, assets/images/planner-timeline-1440.webp 1440w" sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 90vw, 680px" width="1440" height="1040" alt="Actual Travel Planner Timeline showing a day-by-day itinerary." loading=lazy decoding="async"></a>
+          <div class="product-copy"><p class="eyebrow">Meet the Travel Planner</p><h3>Big adventures.<br>Small details, handled.</h3><p>An interactive HTML planner for your bookings, daily plans, group expenses, and packing lists. Keep the whole trip in a file you can make your own.</p><ul class="check-list"><li>Home, Bookings, Timeline, Budget, and Packing</li><li>Split expenses and track repayments</li><li>Personalize your trip with travel themes</li></ul><a class="btn-primary" href="travel-planner.html">Explore Travel Planner <span aria-hidden="true">→</span></a><p class="fine-print">HTML download · Desktop or laptop recommended</p></div>
+        </article>
+      </div>
+    </section>
+    <section class="section services" id="services">
+      <div class="container services-grid">
+        <div class="services-intro"><p class="eyebrow">02 / Custom work</p><h2>Your business <br>has its own way. <br><span>Your tools can, too.</span></h2><p class="lead">From a clearer view of your numbers to a workflow that saves you time, we build around the way you actually work.</p><a href="mailto:matt@zanodatastudio.com" class="text-link">Tell us what you have in mind <span aria-hidden="true">↗</span></a></div>
+        <div class="service-list">
+          <article><span>01</span><div><h3>Dashboards &amp; reporting</h3><p>Bring your numbers into focus with Looker Studio, Power BI, Tableau, Google Sheets, or a custom web dashboard.</p></div></article>
+          <article><span>02</span><div><h3>Custom web apps &amp; widgets</h3><p>Lightweight, purpose-built tools for the tasks your off-the-shelf software doesn’t quite cover.</p></div></article>
+          <article><span>03</span><div><h3>Data pipelines</h3><p>Connect your systems, clean your data, and give your reporting a reliable foundation.</p></div></article>
+          <article><span>04</span><div><h3>Spreadsheet automation</h3><p>Turn manual steps into useful workflows with Google Sheets and Apps Script.</p></div></article>
+          <article><span>05</span><div><h3>Analytics audits</h3><p>Understand what’s working, what’s missing, and what to improve next.</p></div></article>
         </div>
       </div>
     </section>
-
-    <!-- ====== SERVICES ====== -->
-    <section class="services" id="services">
-      <div class="container">
-        <div class="services-grid">
-          <div class="services-positioning fade-up">
-            <div class="section-label">[ Services ]</div>
-            <h2 class="section-heading">Need something custom?</h2>
-            <p class="section-subtext">7 years of data engineering, BI, and analytics architecture. Available for consulting engagements.</p>
-            <p>We spend our days building analytics infrastructure for growing companies. We bring that same rigor to smaller engagements, without the enterprise price tag.</p>
-            <span class="credibility">Based in the NYC metropolitan area · Available remotely · Small team, senior talent</span>
-          </div>
-
-          <div class="services-list fade-up">
-            <div class="service-item">
-              <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <div>
-                <div class="service-title">Custom Web Apps &amp; Widgets</div>
-                <div class="service-desc">We build lightweight, purpose-built web tools and interactive widgets tailored to your business needs.</div>
-              </div>
-            </div>
-            <div class="service-item">
-              <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <div>
-                <div class="service-title">Dashboard &amp; Reporting</div>
-                <div class="service-desc">Custom dashboards in Looker Studio, Power BI, Tableau, Google Sheets, or the web, built around your actual data and whatever platform fits your needs best.</div>
-              </div>
-            </div>
-            <div class="service-item">
-              <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <div>
-                <div class="service-title">Data Pipeline Setup</div>
-                <div class="service-desc">Connect your tools, clean your data, and build workflows that run without manual effort.</div>
-              </div>
-            </div>
-            <div class="service-item">
-              <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <div>
-                <div class="service-title">Spreadsheet Automation</div>
-                <div class="service-desc">Turn your messy spreadsheets into clean, automated systems using Google Sheets and Apps Script.</div>
-              </div>
-            </div>
-            <div class="service-item">
-              <svg class="service-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <div>
-                <div class="service-title">Analytics Audit</div>
-                <div class="service-desc">A structured review of your current data setup with a clear, prioritized action plan.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="services-cta fade-up">
-          <h3>Let's talk about your project</h3>
-          <p>Reach out and we'll scope it out together. No commitment, just a conversation.</p>
-          <a href="mailto:matt@zanodatastudio.com" class="btn-primary">Send a Message →</a>
-        </div>
-      </div>
+    <section class="section" id="about">
+      <div class="container about-grid"><div class="about-mark" aria-hidden="true"><img src="favicon.svg" alt="" width="200" height="200"></div><div><p class="eyebrow">03 / Behind the studio</p><h2>Experience in data.<br>Care in the details.</h2><p class="lead">Led by a data analytics manager with 7+ years building pipelines, data models, dashboards, and reporting systems, Zano Data Studio brings that experience to practical everyday tools.</p><p>We care about the small things: a useful overview, a clear next step, and a tool you look forward to opening.</p><div class="tags"><span>NYC metropolitan area</span><span>Available remotely</span></div></div></div>
     </section>
-
-    <!-- ====== ABOUT ====== -->
-    <section class="about" id="about">
-      <div class="container">
-        <div class="about-content">
-          <div class="section-label fade-up">[ About ]</div>
-          <h2 class="section-heading fade-up">Built by someone who does this for a living.</h2>
-          <div class="about-text fade-up">
-            <p>We're a team led by a data analytics manager with 7+ years building end-to-end analytics solutions, from data pipelines and modeling to BI dashboards and reporting frameworks. Our day job is turning raw data into decisions.</p>
-            <p>Zano Data Studio is where we package that experience into tools and services that are actually accessible to small business owners. No bloated software subscriptions. No enterprise complexity. Just clean, functional tools that work.</p>
-            <p>Every product in the shop is something we'd use ourselves.</p>
-          </div>
-          <div class="about-stats fade-up">
-            <span class="about-stat">7+ years in data analytics</span>
-            <span class="about-stat">Full-stack analytics builds</span>
-            <span class="about-stat">Based in the NYC metro area</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <section class="contact-section"><div class="container contact-panel"><div><p class="eyebrow">Let’s make something useful</p><h2>A clearer next step<br>starts with a conversation.</h2></div><a href="mailto:matt@zanodatastudio.com" class="btn-primary">Get in touch <span aria-hidden="true">↗</span></a></div></section>
   </main>
-
-  <!-- ====== FOOTER ====== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-main">
-        <div>
-          <div class="footer-brand">Zano Data Studio</div>
-          <div class="footer-copy">&copy; 2026 Zano Data Studio. All rights reserved.</div>
-        </div>
-        <div class="footer-links">
-          <a href="#products">Products</a>
-          <a href="#services">Services</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="mailto:matt@zanodatastudio.com">Contact</a>
-        </div>
-        <div class="footer-social">Social links coming soon</div>
+        <div><a class="nav-brand" href="index.html"><img src="favicon.svg" width="38" height="38" alt=""><span>Zano Data Studio</span></a><p>Dashboards · Web apps · Digital tools</p></div>
+        <nav class="footer-links" aria-label="Footer navigation"><a href="#products">Products</a><a href="#services">Services</a><a href="travel-planner.html">Travel Planner</a><a href="privacy.html">Privacy Policy</a><a href="mailto:matt@zanodatastudio.com">Contact</a></nav>
       </div>
+      <div class="footer-bottom"><span>© 2026 Zano Data Studio</span><span>Made for the way you work and live.</span></div>
     </div>
   </footer>
-
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
