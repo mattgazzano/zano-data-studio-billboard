@@ -135,5 +135,26 @@
     "failed_requests": [],
     "navigation_without_javascript": true,
     "outbound_navigation": "Etsy, full YouTube playlist, and tutorials 01, 08, 12 exercised in isolated popup pages; all twelve IDs checked against the live API report."
+  },
+  "embedded_player_checks": {
+    "viewport_widths": [
+      375,
+      768,
+      1440
+    ],
+    "page_viewport_combinations": 9,
+    "controls_attempted": 123,
+    "all_twelve_episode_switches": "passed at each viewport",
+    "browser_errors": [],
+    "broken_internal_links": [],
+    "failed_requests": [],
+    "navigation_without_javascript": true,
+    "youtube_requests_before_interaction": 0,
+    "real_youtube_playback": {
+      "episode": 1,
+      "ready_state": 4,
+      "playing": true
+    },
+    "youtube_player_parameters_reference": "https://developers.google.com/youtube/player_parameters"
   }
 }

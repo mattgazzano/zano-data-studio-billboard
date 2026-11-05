@@ -20,7 +20,7 @@ fs.mkdirSync(output, {recursive:true});
     for (const width of [375, 768, 1440]) {
       const context = await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
       // Verify navigation in isolated popup pages without loading third-party trackers.
-      for (const pattern of ['https://www.etsy.com/listing/**','https://www.youtube.com/**']) {
+      for (const pattern of ['https://www.etsy.com/listing/**','https://www.youtube.com/**','https://www.youtube-nocookie.com/**']) {
         await context.route(pattern, route=>route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><title>Outbound navigation check</title>'}));
       }
       const page = await context.newPage();
@@ -40,6 +40,7 @@ fs.mkdirSync(output, {recursive:true});
         await page.evaluate(()=>document.fonts.ready);
         await page.locator('footer').scrollIntoViewIfNeeded();
         await page.evaluate(()=>scrollTo(0,0));
+        await page.evaluate(()=>document.querySelectorAll('img[loading="lazy"]').forEach(image=>image.loading="eager"));
         await page.waitForFunction(()=>Array.from(document.images).every(image=>!image.getClientRects().length||image.complete));
         const state = await page.evaluate(()=>({
           overflow:document.documentElement.scrollWidth>innerWidth,
@@ -108,7 +109,10 @@ fs.mkdirSync(output, {recursive:true});
         if(route!=='privacy.html') {
           await checkOutbound(page.locator('.btn-etsy').first(),destinations.etsy.url);
           if(route==='index.html') {
-            await checkOutbound(page.locator('.tutorial-shortcut'),'https://www.youtube.com/playlist?list='+destinations.youtube.playlist_id);
+            await page.locator('.tutorial-shortcut').click(); report.controlsAttempted++;
+            assert.equal(page.url(),target+'/travel-planner.html#tutorials');
+            await page.locator('.tutorial-player').waitFor({state:'visible'});
+            await page.goto(target+'/index.html',{waitUntil:'networkidle'});
             await page.locator('.product-spotlight').screenshot({path:path.join(output,'product-card-'+width+'.png')});
           } else {
             const lessons=page.locator('.tutorial-list > li a');
@@ -122,7 +126,29 @@ fs.mkdirSync(output, {recursive:true});
             await page.locator('.product-heading .btn-youtube').click(); report.controlsAttempted++;
             assert.equal(new URL(page.url()).hash,'#tutorials');
             await checkOutbound(page.locator('#tutorials .btn-youtube'),'https://www.youtube.com/playlist?list='+destinations.youtube.playlist_id);
-            for(const index of [0,7,11]) await checkOutbound(lessons.nth(index),await lessons.nth(index).getAttribute('href'));
+            assert.equal(await page.locator('.tutorial-screen iframe').count(),0,'player does not load before interaction');
+            await page.locator('#tutorials').screenshot({path:path.join(output,'tutorial-preview-'+width+'.png')});
+            await page.locator('.tutorial-play').click(); report.controlsAttempted++;
+            assert.equal(await page.locator('.tutorial-screen iframe').count(),1);
+            assert.ok((await page.locator('.tutorial-screen iframe').getAttribute('src')).includes('/embed/'+destinations.youtube.videos[0].id));
+            for(let index=0;index<12;index++) {
+              if(index===0) await lessons.nth(index).press('Enter');
+              else await lessons.nth(index).click();
+              report.controlsAttempted++;
+              const frame=page.locator('.tutorial-screen iframe');
+              assert.equal(await frame.count(),1,'one player while switching episodes');
+              const source=new URL(await frame.getAttribute('src'));
+              assert.equal(source.hostname,'www.youtube-nocookie.com');
+              assert.equal(source.pathname,'/embed/'+destinations.youtube.videos[index].id);
+              assert.equal(source.searchParams.get('autoplay'),'1');
+              assert.equal(await frame.getAttribute('referrerpolicy'),'strict-origin-when-cross-origin');
+              assert.equal(await lessons.nth(index).getAttribute('aria-current'),'true');
+              assert.equal(await page.locator('.tutorial-list [aria-current="true"]').count(),1);
+              assert.equal(await page.locator('#tutorial-current-title').textContent(),await lessons.nth(index).locator('strong').textContent());
+              const box=await frame.boundingBox();
+              assert.ok(box.width>=200&&box.height>=200,'minimum YouTube embed dimensions');
+            }
+            await checkOutbound(page.locator('.tutorial-external'),await lessons.nth(11).getAttribute('href'));
             await page.locator('#tutorials').screenshot({path:path.join(output,'tutorial-library-'+width+'.png')});
           }
           await page.evaluate(()=>scrollTo(0,0));
@@ -138,7 +164,11 @@ fs.mkdirSync(output, {recursive:true});
       await page.goto(target+'/'+route);
       assert.equal(await page.locator('.nav-links').isVisible(),true,'navigation without JS');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'no-JS overflow');
-      if(route==='travel-planner.html') assert.equal(await page.locator('.preview-panel:visible').count(),5);
+      if(route==='travel-planner.html') {
+        assert.equal(await page.locator('.preview-panel:visible').count(),5);
+        assert.equal(await page.locator('.tutorial-player').isVisible(),false);
+        assert.equal(await page.locator('.tutorial-list a[target="_blank"]').count(),12);
+      }
     }
     report.noJavaScript=true;
     report.externalLinks=Array.from(external);

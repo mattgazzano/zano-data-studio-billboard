@@ -191,6 +191,34 @@ h1 span, .services-intro h2 span { color: #BAC4D0; }
 .lesson-duration { color: var(--muted); font: 10px/1.5 var(--mono); }
 .lesson-arrow { color: var(--secondary); font-size: 15px; }
 .tutorial-note { color: var(--muted); font-size: 12px; margin-top: 22px; }
+.has-js .tutorial-layout { display: grid; grid-template-columns: minmax(0,1.7fr) minmax(0,1fr); align-items: start; gap: 24px; }
+.tutorial-list-heading { display: flex; justify-content: space-between; gap: 12px; margin: 0 8px 14px 0; color: var(--secondary); font: 10px/1.5 var(--mono); }
+.tutorial-episodes { min-width: 0; }
+.tutorial-player { min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); scroll-margin-top: 110px; }
+.tutorial-screen { position: relative; aspect-ratio: 16 / 9; min-height: 200px; background: #050810; }
+.tutorial-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.tutorial-play { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; cursor: pointer; color: var(--text); background: #050810; font: inherit; }
+.tutorial-play img { width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: .65; }
+.tutorial-play-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: linear-gradient(0deg,rgba(5,8,16,.8),rgba(5,8,16,.12)); font-size: 14px; font-weight: 500; }
+.tutorial-play-icon { display: grid; place-items: center; padding-left: 4px; width: 68px; height: 68px; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; background: rgba(10,15,26,.8); font-size: 22px; transition: background .2s, transform .2s; }
+.tutorial-play:hover .tutorial-play-icon { background: #16A34A; transform: scale(1.06); }
+.tutorial-play:focus-visible { outline: 3px solid var(--green); outline-offset: -5px; }
+.tutorial-caption { padding: 24px; }
+.tutorial-caption .eyebrow { margin-bottom: 12px; font-size: 10px; }
+.tutorial-caption h3 { font: 28px/1.2 var(--display); margin: 0 0 18px; }
+.tutorial-external { font-size: 12px; }
+.has-js .tutorial-list { grid-template-columns: 1fr; max-height: 550px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #465166 var(--surface); padding-right: 8px; gap: 8px; }
+.has-js .tutorial-list a { min-height: 84px; padding: 16px; gap: 12px; }
+.tutorial-list a[aria-current="true"] { border-color: var(--green); background: rgba(34,197,94,.07); }
+.tutorial-list a[aria-current="true"] .lesson-arrow { color: var(--green); }
+@media (max-width: 1000px) {
+  .has-js .tutorial-layout { grid-template-columns: 1fr; }
+  .has-js .tutorial-list { max-height: 340px; }
+}
+@media (max-width: 767px) {
+  .tutorial-caption { padding: 22px 18px; }
+  .tutorial-caption h3 { font-size: 25px; }
+}
 .contact-panel .btn-etsy { flex-shrink: 0; }
 @media (max-width: 900px) {
   .tutorial-list a { padding: 18px; gap: 10px; grid-template-columns: 25px minmax(0,1fr) 14px; }
