@@ -15,10 +15,22 @@ fs.mkdirSync(output, {recursive:true});
   const browser = await chromium.launch(launch);
   const report = {target, pages:[], controlsAttempted:0, errors:[], brokenLinks:[], failedRequests:[], noJavaScript:false};
   const external = new Set();
+  const destinations = JSON.parse(fs.readFileSync(path.join(__dirname, '../docs/product-links-verification.json'), 'utf8'));
   try {
     for (const width of [375, 768, 1440]) {
       const context = await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
+      // Verify navigation in isolated popup pages without loading third-party trackers.
+      for (const pattern of ['https://www.etsy.com/listing/**','https://www.youtube.com/**']) {
+        await context.route(pattern, route=>route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><title>Outbound navigation check</title>'}));
+      }
       const page = await context.newPage();
+      async function checkOutbound(link, expected) {
+        const [popup] = await Promise.all([page.waitForEvent('popup'),link.click()]);
+        await popup.waitForLoadState('domcontentloaded');
+        assert.equal(popup.url(), expected);
+        await popup.close();
+        report.controlsAttempted++;
+      }
       page.on('pageerror', error=>report.errors.push({width,error:error.message}));
       page.on('console', message=>{if(message.type()==='error') report.errors.push({width,error:message.text()});});
       page.on('requestfailed', request=>report.failedRequests.push({url:request.url(),error:request.failure()?.errorText}));
@@ -90,6 +102,28 @@ fs.mkdirSync(output, {recursive:true});
             await summary.click(); report.controlsAttempted++;
             assert.equal(await summary.evaluate(el=>el.parentElement.open),true);
             await summary.click(); report.controlsAttempted++;
+          }
+          await page.evaluate(()=>scrollTo(0,0));
+        }
+        if(route!=='privacy.html') {
+          await checkOutbound(page.locator('.btn-etsy').first(),destinations.etsy.url);
+          if(route==='index.html') {
+            await checkOutbound(page.locator('.tutorial-shortcut'),'https://www.youtube.com/playlist?list='+destinations.youtube.playlist_id);
+            await page.locator('.product-spotlight').screenshot({path:path.join(output,'product-card-'+width+'.png')});
+          } else {
+            const lessons=page.locator('.tutorial-list > li a');
+            assert.equal(await lessons.count(),12);
+            for(let i=0;i<12;i++) {
+              const url=new URL(await lessons.nth(i).getAttribute('href'));
+              assert.equal(url.searchParams.get('v'),destinations.youtube.videos[i].id);
+              assert.equal(url.searchParams.get('list'),destinations.youtube.playlist_id);
+              assert.equal(await lessons.nth(i).getAttribute('target'),'_blank');
+            }
+            await page.locator('.product-heading .btn-youtube').click(); report.controlsAttempted++;
+            assert.equal(new URL(page.url()).hash,'#tutorials');
+            await checkOutbound(page.locator('#tutorials .btn-youtube'),'https://www.youtube.com/playlist?list='+destinations.youtube.playlist_id);
+            for(const index of [0,7,11]) await checkOutbound(lessons.nth(index),await lessons.nth(index).getAttribute('href'));
+            await page.locator('#tutorials').screenshot({path:path.join(output,'tutorial-library-'+width+'.png')});
           }
           await page.evaluate(()=>scrollTo(0,0));
         }

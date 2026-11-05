@@ -1,0 +1,139 @@
+{
+  "verified_at": "2026-11-05T03:13:52.169307+00:00",
+  "etsy": {
+    "listing_id": 4609387479,
+    "shop_id": 65065424,
+    "state": "active",
+    "title": "Travel Planner, Interactive HTML Vacation Itinerary with Budget and Packing List",
+    "url": "https://www.etsy.com/listing/4609387479/travel-planner-interactive-html-vacation"
+  },
+  "youtube": {
+    "playlist_id": "PLKkAvEyongkw",
+    "playlist_title": "Zano Travel Planner: Complete Tutorial Series",
+    "playlist_privacy": "unlisted",
+    "videos": [
+      {
+        "episode": 1,
+        "id": "5q_KAIfcWkg",
+        "title": "Create a Trip & Set Up Home | Zano Travel Planner Tutorial 01",
+        "privacy": "unlisted",
+        "duration": "PT4M22S",
+        "url": "https://www.youtube.com/watch?v=5q_KAIfcWkg",
+        "embeddable": true
+      },
+      {
+        "episode": 2,
+        "id": "A7Xk0xejanM",
+        "title": "Bookings: Hotels, Tours & Reservations | Zano Travel Planner Tutorial 02",
+        "privacy": "unlisted",
+        "duration": "PT4M20S",
+        "url": "https://www.youtube.com/watch?v=A7Xk0xejanM",
+        "embeddable": true
+      },
+      {
+        "episode": 3,
+        "id": "CNcnQvRqxwY",
+        "title": "How to Save Your Planner (Save As) | Zano Travel Planner Tutorial 03",
+        "privacy": "unlisted",
+        "duration": "PT3M4S",
+        "url": "https://www.youtube.com/watch?v=CNcnQvRqxwY",
+        "embeddable": true
+      },
+      {
+        "episode": 4,
+        "id": "Soir9X0oZZg",
+        "title": "Flights, Trains & Round Trips | Zano Travel Planner Tutorial 04",
+        "privacy": "unlisted",
+        "duration": "PT4M4S",
+        "url": "https://www.youtube.com/watch?v=Soir9X0oZZg",
+        "embeddable": true
+      },
+      {
+        "episode": 5,
+        "id": "PLIkDMR0MOY",
+        "title": "Build Your Daily Itinerary | Zano Travel Planner Tutorial 05",
+        "privacy": "unlisted",
+        "duration": "PT4M20S",
+        "url": "https://www.youtube.com/watch?v=PLIkDMR0MOY",
+        "embeddable": true
+      },
+      {
+        "episode": 6,
+        "id": "vWwd6-P5C0E",
+        "title": "Link Bookings to Your Itinerary | Zano Travel Planner Tutorial 06",
+        "privacy": "unlisted",
+        "duration": "PT4M31S",
+        "url": "https://www.youtube.com/watch?v=vWwd6-P5C0E",
+        "embeddable": true
+      },
+      {
+        "episode": 7,
+        "id": "IONEPzcXjvk",
+        "title": "Places, Maps & Routes | Zano Travel Planner Tutorial 07",
+        "privacy": "unlisted",
+        "duration": "PT4M9S",
+        "url": "https://www.youtube.com/watch?v=IONEPzcXjvk",
+        "embeddable": true
+      },
+      {
+        "episode": 8,
+        "id": "lqkA2D5ATbA",
+        "title": "Budget, Currencies & Shared Costs | Zano Travel Planner Tutorial 08",
+        "privacy": "unlisted",
+        "duration": "PT4M1S",
+        "url": "https://www.youtube.com/watch?v=lqkA2D5ATbA",
+        "embeddable": true
+      },
+      {
+        "episode": 9,
+        "id": "j-40jZqBovg",
+        "title": "Balances, Repayments & Settling Up | Zano Travel Planner Tutorial 09",
+        "privacy": "unlisted",
+        "duration": "PT3M35S",
+        "url": "https://www.youtube.com/watch?v=j-40jZqBovg",
+        "embeddable": true
+      },
+      {
+        "episode": 10,
+        "id": "whAhK3bqLUY",
+        "title": "Packing Lists, Bags & Shopping | Zano Travel Planner Tutorial 10",
+        "privacy": "unlisted",
+        "duration": "PT4M4S",
+        "url": "https://www.youtube.com/watch?v=whAhK3bqLUY",
+        "embeddable": true
+      },
+      {
+        "episode": 11,
+        "id": "3pL2WWaxd4w",
+        "title": "Backups, Imports, Exports & Printing | Zano Travel Planner Tutorial 11",
+        "privacy": "unlisted",
+        "duration": "PT4M34S",
+        "url": "https://www.youtube.com/watch?v=3pL2WWaxd4w",
+        "embeddable": true
+      },
+      {
+        "episode": 12,
+        "id": "5VH_RMOf_MI",
+        "title": "Plan with AI & Import Your Itinerary | Zano Travel Planner Tutorial 12",
+        "privacy": "unlisted",
+        "duration": "PT2M44S",
+        "url": "https://www.youtube.com/watch?v=5VH_RMOf_MI",
+        "embeddable": true
+      }
+    ]
+  },
+  "website_checks": {
+    "viewport_widths": [
+      375,
+      768,
+      1440
+    ],
+    "page_viewport_combinations": 9,
+    "controls_attempted": 90,
+    "browser_errors": [],
+    "broken_internal_links": [],
+    "failed_requests": [],
+    "navigation_without_javascript": true,
+    "outbound_navigation": "Etsy, full YouTube playlist, and tutorials 01, 08, 12 exercised in isolated popup pages; all twelve IDs checked against the live API report."
+  }
+}
