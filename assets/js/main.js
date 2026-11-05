@@ -70,4 +70,50 @@
       });
     });
   }
+
+  var tutorialPlayer = document.querySelector('.tutorial-player');
+  if (tutorialPlayer) {
+    var screen = tutorialPlayer.querySelector('.tutorial-screen');
+    var lessons = Array.from(document.querySelectorAll('.tutorial-list a'));
+    var currentLesson = lessons[0];
+    tutorialPlayer.hidden = false;
+    lessons.forEach(function (link, index) {
+      var title = link.querySelector('strong').textContent;
+      link.setAttribute('aria-label', 'Play tutorial ' + (index + 1) + ': ' + title);
+      link.setAttribute('aria-controls', 'tutorial-player');
+      link.querySelector('.lesson-duration').textContent = link.querySelector('.lesson-duration').textContent.replace('Watch on YouTube', 'Watch here');
+      link.querySelector('.lesson-arrow').textContent = '▶';
+      if (index === 0) link.setAttribute('aria-current', 'true');
+      link.addEventListener('click', function (event) {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        currentLesson = link;
+        lessons.forEach(function (other) { other.removeAttribute('aria-current'); });
+        link.setAttribute('aria-current', 'true');
+        var duration = link.querySelector('.lesson-duration').textContent.split(' · ')[0];
+        document.getElementById('tutorial-position').textContent = 'Tutorial ' + String(index + 1).padStart(2, '0') + ' of ' + lessons.length + ' · ' + duration;
+        document.getElementById('tutorial-current-title').textContent = title;
+        tutorialPlayer.querySelector('.tutorial-external').href = link.href;
+        playTutorial();
+        if (window.matchMedia('(max-width: 1000px)').matches) {
+          tutorialPlayer.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start'});
+        }
+      });
+    });
+    function playTutorial() {
+      var videoId = new URL(currentLesson.href).searchParams.get('v');
+      if (!/^[\w-]{11}$/.test(videoId)) return;
+      var frame = document.createElement('iframe');
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&playsinline=1&rel=0';
+      frame.title = 'Travel Planner tutorial: ' + currentLesson.querySelector('strong').textContent;
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      frame.allowFullscreen = true;
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
+      screen.replaceChildren(frame);
+    }
+    tutorialPlayer.querySelector('.tutorial-play').addEventListener('click', function () {
+      playTutorial();
+      screen.querySelector('iframe').focus();
+    });
+  }
 })();
