@@ -156,5 +156,23 @@
       "playing": true
     },
     "youtube_player_parameters_reference": "https://developers.google.com/youtube/player_parameters"
+  },
+  "accordion_checks": {
+    "viewport_widths": [
+      375,
+      768,
+      1440
+    ],
+    "page_viewport_combinations": 9,
+    "controls_attempted": 123,
+    "all_twelve_expansions": "passed at each viewport",
+    "one_open_at_a_time": true,
+    "collapse_removes_player": true,
+    "no_autoplay": true,
+    "player_fits_row": true,
+    "keyboard_and_no_javascript_fallbacks": true,
+    "browser_errors": [],
+    "failed_requests": [],
+    "broken_internal_links": []
   }
 }
