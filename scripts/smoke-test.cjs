@@ -99,7 +99,7 @@ fs.mkdirSync(output, {recursive:true});
           await page.getByRole('tab',{name:'Home',exact:true}).press('End'); report.controlsAttempted++;
           assert.equal(await page.getByRole('tab',{name:'Packing',exact:true}).getAttribute('aria-selected'),'true');
           await page.getByRole('tab',{name:'Packing',exact:true}).press('Home'); report.controlsAttempted++;
-          for(const summary of await page.locator('summary').all()) {
+          for(const summary of await page.locator('.faq-list summary').all()) {
             await summary.click(); report.controlsAttempted++;
             assert.equal(await summary.evaluate(el=>el.parentElement.open),true);
             await summary.click(); report.controlsAttempted++;
@@ -111,7 +111,7 @@ fs.mkdirSync(output, {recursive:true});
           if(route==='index.html') {
             await page.locator('.tutorial-shortcut').click(); report.controlsAttempted++;
             assert.equal(page.url(),target+'/travel-planner.html#tutorials');
-            await page.locator('.tutorial-player').waitFor({state:'visible'});
+            await page.locator('.tutorial-episode summary').first().waitFor({state:'visible'});
             await page.goto(target+'/index.html',{waitUntil:'networkidle'});
             await page.locator('.product-spotlight').screenshot({path:path.join(output,'product-card-'+width+'.png')});
           } else {
@@ -126,29 +126,35 @@ fs.mkdirSync(output, {recursive:true});
             await page.locator('.product-heading .btn-youtube').click(); report.controlsAttempted++;
             assert.equal(new URL(page.url()).hash,'#tutorials');
             await checkOutbound(page.locator('#tutorials .btn-youtube'),'https://www.youtube.com/playlist?list='+destinations.youtube.playlist_id);
-            assert.equal(await page.locator('.tutorial-screen iframe').count(),0,'player does not load before interaction');
-            await page.locator('#tutorials').screenshot({path:path.join(output,'tutorial-preview-'+width+'.png')});
-            await page.locator('.tutorial-play').click(); report.controlsAttempted++;
-            assert.equal(await page.locator('.tutorial-screen iframe').count(),1);
-            assert.ok((await page.locator('.tutorial-screen iframe').getAttribute('src')).includes('/embed/'+destinations.youtube.videos[0].id));
+            assert.equal(await page.locator('.tutorial-screen iframe').count(),0,'no embed before expansion');
+            assert.equal(await page.locator('.tutorial-episode[open]').count(),0,'all episodes start collapsed');
+            await page.locator('#tutorials').screenshot({path:path.join(output,'tutorial-collapsed-'+width+'.png')});
+            const episodes=page.locator('.tutorial-episode');
             for(let index=0;index<12;index++) {
-              if(index===0) await lessons.nth(index).press('Enter');
-              else await lessons.nth(index).click();
+              const episode=episodes.nth(index);
+              if(index===0) await episode.locator('summary').press('Enter');
+              else await episode.locator('summary').click();
               report.controlsAttempted++;
-              const frame=page.locator('.tutorial-screen iframe');
-              assert.equal(await frame.count(),1,'one player while switching episodes');
+              const frame=episode.locator('iframe');
+              await frame.waitFor({state:'visible'});
+              await page.waitForFunction(()=>document.querySelectorAll('.tutorial-screen iframe').length===1);
+              assert.equal(await page.locator('.tutorial-episode[open]').count(),1,'only one tutorial expanded');
               const source=new URL(await frame.getAttribute('src'));
               assert.equal(source.hostname,'www.youtube-nocookie.com');
               assert.equal(source.pathname,'/embed/'+destinations.youtube.videos[index].id);
-              assert.equal(source.searchParams.get('autoplay'),'1');
+              assert.equal(source.searchParams.get('autoplay'),'0');
               assert.equal(await frame.getAttribute('referrerpolicy'),'strict-origin-when-cross-origin');
-              assert.equal(await lessons.nth(index).getAttribute('aria-current'),'true');
-              assert.equal(await page.locator('.tutorial-list [aria-current="true"]').count(),1);
-              assert.equal(await page.locator('#tutorial-current-title').textContent(),await lessons.nth(index).locator('strong').textContent());
+              assert.ok((await frame.getAttribute('title')).includes(await episode.locator('strong').textContent()));
               const box=await frame.boundingBox();
               assert.ok(box.width>=200&&box.height>=200,'minimum YouTube embed dimensions');
+              const row=await episode.boundingBox();
+              assert.ok(box.x>=row.x&&box.x+box.width<=row.x+row.width,'player fits the expanded row');
+              if(index===0) await episode.screenshot({path:path.join(output,'tutorial-expanded-'+width+'.png')});
             }
-            await checkOutbound(page.locator('.tutorial-external'),await lessons.nth(11).getAttribute('href'));
+            await checkOutbound(episodes.nth(11).locator('.tutorial-external'),await lessons.nth(11).getAttribute('href'));
+            await episodes.nth(11).locator('summary').press('Enter'); report.controlsAttempted++;
+            await page.waitForFunction(()=>!document.querySelector('.tutorial-screen iframe'));
+            assert.equal(await page.locator('.tutorial-episode[open]').count(),0,'collapse stops playback');
             await page.locator('#tutorials').screenshot({path:path.join(output,'tutorial-library-'+width+'.png')});
           }
           await page.evaluate(()=>scrollTo(0,0));
@@ -166,7 +172,10 @@ fs.mkdirSync(output, {recursive:true});
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'no-JS overflow');
       if(route==='travel-planner.html') {
         assert.equal(await page.locator('.preview-panel:visible').count(),5);
-        assert.equal(await page.locator('.tutorial-player').isVisible(),false);
+        assert.equal(await page.locator('.tutorial-episode').count(),12);
+        await page.locator('.tutorial-episode summary').first().click();
+        assert.equal(await page.locator('.tutorial-external').first().isVisible(),true);
+        assert.equal(await page.locator('.tutorial-screen iframe').count(),0);
         assert.equal(await page.locator('.tutorial-list a[target="_blank"]').count(),12);
       }
     }
